@@ -9,6 +9,7 @@ import { EnterpriseAssetTracker } from './components/EnterpriseAssetTracker';
 import { AIThreatBriefing } from './components/AIThreatBriefing';
 import { AlertRulesManager } from './components/AlertRulesManager';
 import { ExportReportModal } from './components/ExportReportModal';
+import { SystemDocumentationModal } from './components/SystemDocumentationModal';
 
 import {
   LocationInfo,
@@ -41,6 +42,7 @@ export default function App() {
   const [assets, setAssets] = useState<EnterpriseAsset[]>(INITIAL_ENTERPRISE_ASSETS);
   const [alertRules, setAlertRules] = useState<AlertRule[]>(DEFAULT_ALERT_RULES);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [isDocsModalOpen, setIsDocsModalOpen] = useState(false);
 
   // Fetch Meteorological Telemetry Data
   const fetchWeatherData = useCallback(async (loc: LocationInfo) => {
@@ -135,6 +137,7 @@ export default function App() {
         onRefresh={() => fetchWeatherData(currentLocation)}
         isLoading={isLoading}
         onOpenExportModal={() => setIsExportModalOpen(true)}
+        onOpenDocsModal={() => setIsDocsModalOpen(true)}
         activeAlertsCount={activeAlertsCount}
       />
 
@@ -274,6 +277,12 @@ export default function App() {
         />
       )}
 
+      {/* System Documentation / Readme Modal */}
+      <SystemDocumentationModal
+        isOpen={isDocsModalOpen}
+        onClose={() => setIsDocsModalOpen(false)}
+      />
+
       {/* Footer */}
       <footer className="mt-auto border-t border-slate-800 bg-slate-900/80 py-6 text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -281,9 +290,18 @@ export default function App() {
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span>Open-Meteo & Gemini AI Telemetry Feed Operational</span>
           </div>
-          <p className="text-[11px] text-slate-500">
-            Aether Weather Intelligence Platform • Enterprise Edition 3.6
-          </p>
+          <div className="flex items-center gap-4 text-[11px] font-mono">
+            <button
+              onClick={() => setIsDocsModalOpen(true)}
+              className="text-sky-400 hover:underline uppercase font-bold"
+            >
+              System Manual / Readme
+            </button>
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-500">
+              Aether Weather Intelligence Platform • Enterprise Edition 4.2
+            </span>
+          </div>
         </div>
       </footer>
     </div>

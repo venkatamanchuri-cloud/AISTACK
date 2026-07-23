@@ -13,6 +13,7 @@ import {
   Bell,
   Sun,
   Moon,
+  BookOpen,
 } from 'lucide-react';
 import { LocationInfo } from '../types';
 import { GLOBAL_HUBS } from '../data/mockEnterpriseData';
@@ -28,6 +29,7 @@ interface HeaderProps {
   onRefresh: () => void;
   isLoading: boolean;
   onOpenExportModal: () => void;
+  onOpenDocsModal: () => void;
   activeAlertsCount: number;
 }
 
@@ -42,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
   onRefresh,
   isLoading,
   onOpenExportModal,
+  onOpenDocsModal,
   activeAlertsCount,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -203,6 +206,16 @@ export const Header: React.FC<HeaderProps> = ({
                   {activeAlertsCount}
                 </span>
               )}
+            </button>
+
+            {/* Docs/Readme Modal Trigger */}
+            <button
+              onClick={onOpenDocsModal}
+              className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-sky-400 font-mono text-xs uppercase tracking-wider rounded-xl border border-slate-800 transition flex items-center gap-1.5"
+              title="System Manual & Readme"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-sky-400" />
+              <span className="hidden sm:inline">Docs</span>
             </button>
 
             {/* Export PDF/CSV Modal Trigger */}
