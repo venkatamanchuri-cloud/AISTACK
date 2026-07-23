@@ -1,0 +1,6 @@
+{
+  "name": "Weather Intelligence Platform",
+  "description": "Enterprise weather intelligence platform with real-time meteorological metrics, Gemini AI predictive analytics, industry impact insights, and risk management.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
